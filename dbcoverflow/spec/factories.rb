@@ -19,7 +19,7 @@ FactoryGirl.define do
 
 
 	factory :vote do
-		score { Faker::Number.digit }
+		score { [1,-1].sample }
 	end
 
 end
