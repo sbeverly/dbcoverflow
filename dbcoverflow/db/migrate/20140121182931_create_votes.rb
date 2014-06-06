@@ -1,4 +1,4 @@
-giclass CreateVotes < ActiveRecord::Migration
+class CreateVotes < ActiveRecord::Migration
   def change
     create_table :votes do |u|
       u.integer :score
