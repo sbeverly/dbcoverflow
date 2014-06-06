@@ -17,6 +17,7 @@ FactoryGirl.define do
 		body { Faker::Lorem.paragraph }
 	end
 
+
 	factory :vote do
 		score { Faker::Number.digit }
 	end
