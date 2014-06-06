@@ -3,6 +3,7 @@ FactoryGirl.define do
 		username { Faker::Internet.user_name }
 		email { Faker::Internet.email }
 		password_hash { "password" }
+
 	end
 
 	factory :question do
@@ -19,7 +20,7 @@ FactoryGirl.define do
 
 
 	factory :vote do
-		score { Faker::Number.digit }
+		score { [1,-1].sample }
 	end
 
 end
