@@ -7,20 +7,17 @@ describe Answer do
   answer.question = question
   answer.user = user
   answer.save
-  # p answer
+
   let (:answer) { answer }
 
-# ========= Field classes
 context "instances" do
   it { answer.should be_an_instance_of(Answer)}
   it { answer.user.should be_an_instance_of(User)}
   it { answer.question.should be_an_instance_of(Question)}
   it { answer.body.should be_an_instance_of(String)}
 end
-  # it { answer.body.should eq "Random question" }
 
-# ========= Responses on migrations
-context "validations" do
+context "associations" do
   it { answer.should respond_to(:body) } 
   it { answer.should respond_to(:question) }
   it { answer.should respond_to(:user) }
