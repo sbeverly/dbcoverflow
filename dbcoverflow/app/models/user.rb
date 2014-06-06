@@ -11,9 +11,9 @@ class User < ActiveRecord::Base
   # validates :password_hash, :length => { :minimum => 6 }
   validates :email, presence: true, :uniqueness => true, :format => /.+@.+\..+/ # imperfect, but okay
 
-  # def password
-  #   @password ||= Password.new(password_hash)
-  # end
+  def password
+    @password ||= Password.new(password_hash)
+  end
 
   # def password=(pass)
   #   @password_hash = pass
@@ -21,10 +21,10 @@ class User < ActiveRecord::Base
   #   self.password_hash = @password
   # end
 
-  # def self.authenticate(email, password)
-  #   user = User.find_by_email(email)
-  #   return user if user && (user.password == password)
-  #   nil # either invalid email or wrong password
-  # end
+  def self.authenticate(email, password)
+    user = User.find_by_email(email)
+    return user if user && (user.password == password)
+    nil # either invalid email or wrong password
+  end
 end
 
