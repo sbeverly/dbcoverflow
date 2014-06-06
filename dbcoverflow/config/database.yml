@@ -3,30 +3,15 @@ development:
   encoding: unicode
   database: dbcoverflow_development
   pool: 5
-<<<<<<< HEAD
-=======
-  username: 
-  password:
->>>>>>> 53ac6750a5b5693ded63a737a1c74b8d052fd544
 
 test:
   adapter: postgresql
   encoding: unicode
   database: dbcoverflow_test
   pool: 5
-<<<<<<< HEAD
-=======
-  username: 
-  password:
->>>>>>> 53ac6750a5b5693ded63a737a1c74b8d052fd544
 
 production:
   adapter: postgresql
   encoding: unicode
   database: dbcoverflow_production
   pool: 5
-<<<<<<< HEAD
-=======
-  username: 
-  password:
->>>>>>> 53ac6750a5b5693ded63a737a1c74b8d052fd544
