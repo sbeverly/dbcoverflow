@@ -1,7 +1,9 @@
 class User < ActiveRecord::Base
-  include BCrypt
-  has_many :comments
-  has_many :votes
+  # include BCrypt
+  has_many :comments, as: :commentable
+  has_many :votes, as: :votable
+  has_many :questions
+  has_many :answers
 
   def password
       @password ||= Password.new(password_hash)
