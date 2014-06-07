@@ -19,18 +19,16 @@ class QuestionsController < ApplicationController
   end
 
 
-  # def preview
-  # 	render :partial => 'preview'
-
-  # end
-
 
   def show_comment
-    @comment = Comment.new 
     
+    @comment = Comment.new 
+  
+  
     respond_to do |format|
       format.js 
     end
+
   end
 
   

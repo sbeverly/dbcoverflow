@@ -18,4 +18,9 @@ Dbcoverflow::Application.routes.draw do
       get 'show_comment'
     end
   end
+
+  # resources :questions do
+  #   resources :comments 
+  # end
+
 end
