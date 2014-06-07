@@ -1,6 +1,8 @@
 class User < ActiveRecord::Base
-  # include BCrypt
-  attr_reader :password_hash
+  require 'bcrypt'
+
+  # attr_reader :password_hash
+  
   has_many :comments, as: :commentable
   has_many :votes, as: :votable
   has_many :questions
@@ -16,7 +18,7 @@ class User < ActiveRecord::Base
   end
 
   # def password=(pass)
-  #   @password_hash = pass
+  #   # @password_hash = pass
   #   @password = Password.create(pass)
   #   self.password_hash = @password
   # end
