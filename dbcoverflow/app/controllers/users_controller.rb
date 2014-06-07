@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-	before_action :find_user, only: [:show, :edit, :udpate, :destroy]
+	before_action :find_user, only: [:show, :edit, :update, :destroy]
 
 	def index
 		@users = User.all
@@ -27,9 +27,9 @@ class UsersController < ApplicationController
 	end
 
 	def update
-		if @user.update(project_params)
+		if @user.update(user_params)
 			flash[:notice] = "User has been updated."
-			redirect to user_path(@user)
+			redirect_to user_path(@user)
 		else
 			flash[:alert] = "User has not been updated ya idiot."
 			redirect_to edit_user_path
