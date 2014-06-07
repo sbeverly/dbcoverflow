@@ -17,7 +17,6 @@ class QuestionsController < ApplicationController
 
 	def edit
 		@question = Question.find(params[:id])
-		# render text: @question.inspect
 	end
 
 	def update
@@ -28,11 +27,10 @@ class QuestionsController < ApplicationController
 		redirect_to root_path
 	end
 
-	def delete
-		
-	end
+	def destroy
+		@question = Question.find(params[:id])
+		@question.destroy
 
-	# def new
-	# 	@question = Question.new(params[:question][:body])
-	# end
+		redirect_to root_path
+	end
 end
