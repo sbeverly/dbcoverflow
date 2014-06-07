@@ -5,9 +5,9 @@ class QuestionsController < ApplicationController
 		@questions = Question.all
 	end
 
-	def new
-		@question = Question.new(params[:question][:body])
-	end
+	# def new
+	# 	@question = Question.new(params[:question][:body])
+	# end
 
 	def show
 		@question = Question.find(params[:id])
