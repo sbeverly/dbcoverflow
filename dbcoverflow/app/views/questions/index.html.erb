@@ -2,7 +2,8 @@
 
 <div class='new-question'>
 	<h2>Ask a Question:</h2>
-	<%= form_for @question, url: {action: "create"} do |f| %>
+
+	<%= form_for @question do |f| %>
 		<%= f.text_area	:body %>
 		<%= f.submit "Post Question" %>
 	<% end %>
@@ -10,6 +11,11 @@
 
 <ul>
 	<% @questions.each do |question| %>
-		<li> <a href="/questions/<%= question.id %>"><%= question.body %></a> - Answers(<%= question.answers.count %>)</li><br>
+		<li> 
+			<a href="/questions/<%= question.id %>"><%= question.body %></a> - Answers(<%= question.answers.count %>)<br>
+			<% if question.user_id == session[:id] %>
+				<a href="/questions/<%= question.id %>/edit"> edit </a> - <a href=""> delete </a>
+			<% end %>
+		</li>
 	<% end %>
 </ul>
