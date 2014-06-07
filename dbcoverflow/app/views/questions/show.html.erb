@@ -1,12 +1,31 @@
 <h1><%= @question.body %></h1>
 <br>
 <br>
-<% if @answers != nil %>
-	<% @answers.each do |answer| %>
-		<ul>
-			<li> 
-				<%= answer.body %>
-			</li>
-		</ul>
-	<% end %>
+
+
+<% unless @question.comments.empty? %>
+	<h3> Comments on Question </h3>
+	<ul>
+		<% @question.comments.each do |comment| %>
+			<li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
+		<% end %>
+	</ul>
+<% end %>
+
+<% if @answers.empty? == false %>
+	<h3>Answers</h3>
+	<ol>
+		<% @answers.each do |answer| %>
+				<li> 
+					<%= answer.body %><br>
+					<ul>
+						<% if answer.comments.empty? == false %>
+							<% answer.comments.each do |comment|  %>
+								<li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
+							<% end %>
+						<% end %> 
+					</ul>
+				</li>
+		<% end %>
+	</ol>
 <% end %>
