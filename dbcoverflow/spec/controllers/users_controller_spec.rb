@@ -5,7 +5,7 @@ describe UsersController do
 	describe "GET #index" do
 		it "assigns all users to @users" do
 			user1 = FactoryGirl.create(:user)
-			user2 = FactoryGirl.create(:user)
+			user2 = FactoryGirl.create(:user, username: "alexander", email: "alex@yahoo.com")
 			get :index
 			expect(assigns(:users)).to match_array([user1, user2])
 		end
@@ -19,12 +19,12 @@ describe UsersController do
 	describe "GET #show" do
 
 		before :each do
-			user = FactoryGirl.create(:user)
-			get :show, id: user
+			@user = FactoryGirl.create(:user)
+			get :show, id: @user
 		end
 
-		it "assigns the request user to @user" do
-			expect(assigns(:user)).to eq user
+		it "assigns the requested user to @user" do
+			expect(assigns(:user)).to eq @user
 		end
 
 		it "renders the :show template" do
