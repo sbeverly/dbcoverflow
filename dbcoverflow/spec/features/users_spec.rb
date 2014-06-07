@@ -3,7 +3,7 @@ require 'spec_helper'
 describe "User" do
 
 		# before :each do
-		# 	visit root_url
+		# 	visit questions_url
 		# 	click_link "Create New User"
 		# end
 
@@ -77,7 +77,16 @@ describe "User" do
 			fill_in 'Password confirmation', with: 'not'
 			fill_in "Email", with: 'example@yahoo.com'
 		end
+	end
 
+	context "can update a user" do
+		it "by changing one of the user's attributes" do
+		end
+	end
+
+	context "can delete a user" do
+		it "by clicking the 'delete user' button " do
+		end
 	end
 	
 end

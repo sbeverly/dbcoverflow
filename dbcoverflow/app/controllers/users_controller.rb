@@ -1,11 +1,11 @@
 class UsersController < ApplicationController
+	before_action :find_user, only: [:show, :edit, :udpate, :destroy]
 
 	def index
 		@users = User.all
 	end
 
 	def show
-		@user = User.find(params[:id])
 	end
 
 	def new
@@ -23,10 +23,33 @@ class UsersController < ApplicationController
 		end
 	end
 
+	def edit
+	end
+
+	def update
+		if @user.update(project_params)
+			flash[:notice] = "User has been updated."
+			redirect to user_path(@user)
+		else
+			flash[:alert] = "User has not been updated ya idiot."
+			redirect_to edit_user_path
+		end
+	end
+
+	def destroy
+		@user.destroy
+		flash[:notice] = "Say bye bye."
+		redirect_to questions_path
+	end
+
 	private
 
 	def user_params
 		params.require(:user).permit(:username, :password, :password_confirmation, :email)
+	end
+
+	def find_user
+		@user = User.find(params[:id])
 	end
 
 end
