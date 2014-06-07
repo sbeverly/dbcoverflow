@@ -5,22 +5,4 @@ FactoryGirl.define do
 		password "password"
 		password_confirmation "password"
 	end
-
-	factory :question do
-		body { Faker::Lorem.sentence }
-	end
-
-	factory :answer do
-		body { Faker::Name.name }
-	end
-
-	factory :comment do
-		body { Faker::Lorem.paragraph }
-	end
-
-
-	factory :vote do
-		score { [1,-1].sample }
-	end
-
 end
