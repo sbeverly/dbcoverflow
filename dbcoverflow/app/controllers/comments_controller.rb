@@ -1,10 +1,13 @@
-class CommentController < ApplicationController
+class CommentsController < ApplicationController
   def index
-    @commentable = find_commentable
-    @comments = @commentable.comments
+    # @commentable = find_commentable
+    # @comments = @commentable.comments
+
+
   end
 
   def show
+
   end
 
   #this is going to render the comment form
@@ -15,16 +18,22 @@ class CommentController < ApplicationController
   ##the comment form is going to post to this method.
   ##create the comment and link to user
   def create
-    @commentable = find_commentable
-    @comment = @commentable.comments.build(params[:comment])
-      if @comment.save
-        flash[:notice] = "successfully created"
-      else
-        render :action => 'new'
-      end
+    # @commentable = find_commentable
+    # @comment = @commentable.comments.build(params[:comment])
+    #   if @comment.save
+    #     return "saved!"
+    #   else
+    #     # render :action => 'new'
+    #     return "nope"
+    #   end
+
+    ##figure out how to save the comment to the QUESTION
+    
+    Comment.create(comment_params)
     # user = User.find(session[:user_id])
     # user.comments.create(params[:comment])
 
+    redirect_to root_path
   end
 
   def edit
@@ -45,5 +54,14 @@ class CommentController < ApplicationController
     end
     nil
   end
+
+
+
+  private
+
+  def comment_params
+    params.require(:comment).permit(:body)
+  end
+
 
 end

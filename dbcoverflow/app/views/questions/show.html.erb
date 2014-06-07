@@ -2,20 +2,16 @@
 
 
 <%= @question.body %>
+	<div id="comments">
+	</div>
+
+ <div id="add_comments">
+
+ </div>
+
 
 <!-- ##adding comment to the QUESTION -->
-<%= link_to "add comment", comment_new_path %>
-<%= link_to "view comments", comment_index %>
+<%#= link_to "add comment", comments_show_comment_path,  :id => "question_comment_link", :remote => true  %>
 
 
-<!-- answers && link to add comment to ANSWER -->
-<p>show the answers:</p>
-<%= @question.answers.each do |answer| %>
-	<%= answer.content %><br>
-	<%= link_to "add comment", comment_new_path %>
-<% end %>
-
-
-
-##prevent default for sending it to a new link
-##javascript is going to drop down the comment box
+<%= link_to "add comment", show_comment_question_path, :remote => true %>
