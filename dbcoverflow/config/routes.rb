@@ -1,5 +1,5 @@
 Dbcoverflow::Application.routes.draw do
-  resources :user
+  resources :users
   resources :comments
   resources :votes
   resources :questions do
