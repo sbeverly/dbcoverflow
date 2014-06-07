@@ -64,13 +64,6 @@ describe "User" do
 			fill_in "Email", with: 'example@yahoo.com'
 		end
 
-		it "by submitting a password less than 6 chars" do
-			fill_in 'Username', with: 'ExampleUsername'
-			fill_in 'Password', with: 'pass'
-			fill_in 'Password confirmation', with: 'pass'
-			fill_in "Email", with: 'example@yahoo.com'
-		end
-
 		it "by submitting an invalid email address" do
 			fill_in 'Username', with: 'ExampleUsername'
 			fill_in 'Password', with: 'password'
