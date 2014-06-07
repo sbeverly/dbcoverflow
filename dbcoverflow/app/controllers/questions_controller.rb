@@ -5,14 +5,9 @@ class QuestionsController < ApplicationController
 		@questions = Question.all
 	end
 
-	# def new
-	# 	@question = Question.new(params[:question][:body])
-	# end
-
 	def show
 		@question = Question.find(params[:id])
 		@answers = @question.answers
-		@comments
 	end
 
 	def create
@@ -21,14 +16,23 @@ class QuestionsController < ApplicationController
 	end
 
 	def edit
-		
+		@question = Question.find(params[:id])
+		# render text: @question.inspect
 	end
 
 	def update
-		
+		@question = Question.find(params[:id])
+		@question.body = params[:question][:body]
+		@question.save
+
+		redirect_to root_path
 	end
 
 	def delete
 		
 	end
+
+	# def new
+	# 	@question = Question.new(params[:question][:body])
+	# end
 end
