@@ -1,0 +1,15 @@
+<h1> Questions </h1>
+
+<div class='new-question'>
+	<h2>Ask a Question:</h2>
+	<%= form_for @question, url: {action: "create"} do |f| %>
+		<%= f.text_area	:body %>
+		<%= f.submit "Post Question" %>
+	<% end %>
+</div>
+
+<ul>
+	<% @questions.each do |question| %>
+		<li> <a href="/questions/<%= question.id %>"><%= question.body %></a> - Answers(<%= question.answers.count %>)</li><br>
+	<% end %>
+</ul>

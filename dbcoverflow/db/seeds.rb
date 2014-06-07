@@ -5,3 +5,8 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
+
+20.times do Question.create(body: Faker::Lorem.sentence)
+	(4..10).to_a.sample.times { Answer.create(question_id: (1..20).to_a.sample, body: Faker::Lorem.sentence)}
+end
+

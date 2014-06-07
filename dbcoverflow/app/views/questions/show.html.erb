@@ -1,0 +1,12 @@
+<h1><%= @question.body %></h1>
+<br>
+<br>
+<% if @answers != nil %>
+	<% @answers.each do |answer| %>
+		<ul>
+			<li> 
+				<%= answer.body %>
+			</li>
+		</ul>
+	<% end %>
+<% end %>
