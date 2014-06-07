@@ -88,7 +88,6 @@ describe "User" do
 			visit user_url(@user)
 		end
 		
-
 		context "can update a user" do
 			it "by changing one of the user's attributes" do
 				click_link "Update Profile"

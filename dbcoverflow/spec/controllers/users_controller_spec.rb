@@ -46,20 +46,20 @@ describe UsersController do
 
 	describe "POST #create" do
 		context "with VALID attributes" do
-			it "saves the new contact in the database" do
+			it "saves the new user in the database" do
 				expect {
 					post :create, user: FactoryGirl.attributes_for(:user)
 					}.to change(User, :count).by(1)
 			end
 
-			it "redirects to user#show" do
+			it "redirects to users#show" do
 				post :create, user: FactoryGirl.attributes_for(:user)
 				expect(response).to redirect_to user_path(assigns[:user])
 			end
 		end
 
 		context "with INVALID attributes" do
-			it "does NOT save the new contact in the databse" do
+			it "does NOT save the new user in the databse" do
 				expect {
 					post :create, user: FactoryGirl.attributes_for(:user, username: 'ex')
 					}.to change(User, :count).by(0)
@@ -73,12 +73,57 @@ describe UsersController do
 	end
 
 	describe "GET #edit" do
+		it "assigns a new user to @user" do
+			get :edit
+			expect(assigns(:user)).to be_a_new(User)
+		end
+
+		it "renders the :edit template" do
+			get :edit
+			expect(response).to render_template :edit
+		end
 	end
 
-	describe "PUT #update" do
+	describe "PATCH #update" do
+
+		before :each do
+			@user = FactoryGirl.create(:user)
+		end
+
+		it "locates the requested @user" do
+			patch :update, id: @user, user: attributes_for(:user)
+			expect(assigns(:user)).to eq(@user)
+		end
+
+		it "updates the user in the database" do
+			patch :udpate, id: @user, user: attributes_for(:user, username: "new_username")
+			@user.reload
+			expect(@user.username).to eq("new_username")
+		end
+
+		it "redirects to users#show" do
+			patch :update, id: @user, user: attributes_for(:user)
+			expect(response).to redirect_to @user
+		end
+
 	end
 
 	describe "DELETE #destroy" do
+
+		before :each do
+			@user = FactoryGirl.create(:user)
+		end
+
+		it "deletes the user in the databse" do
+			expect {
+				delete :destroy, id: @user
+			}.to change(User.count).by(-1)
+		end
+
+		it "redirects to questions#index" do
+			# delete :destroy, id: @user
+			# expect(response).to redirect_to questions_url
+		end
 	end
 	
 end
