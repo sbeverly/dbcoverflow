@@ -1,6 +1,5 @@
 require 'spec_helper'
 
-
 describe User do
   context "#initialize" do
     let(:user) {User.new(email: "Reid@shopcube.com", username: "reidcovington")}

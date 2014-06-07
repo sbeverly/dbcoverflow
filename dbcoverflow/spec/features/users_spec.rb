@@ -2,15 +2,19 @@ require 'spec_helper'
 
 describe "User" do
 
-	context "a user can create a new account with VALID attr" do
+	context "can create a new account with VALID attr" do
+
+		# before :each do
+		# 	visit root_url
+		# 	click_link "Create New User"
+		# end
 
 		before :each do
-			visit root_url
-			click_link "Create New User"
+			visit new_user_url
 		end
 
 		it "by navigating to the user sign up page" do
-			expect(page.url).to eq new_user_url
+			expect(page.current).to eq new_user_url
 		end
 
 		it "by submitting valid user credentials" do
@@ -25,21 +29,21 @@ describe "User" do
 		end
 	end
 
-	context "a user can NOT create a new account with INVALID attr" do
+	context "can NOT create a new account with INVALID attr" do
 
 		after :each do
 			click_button 'Create User'
 			expect(page.current_url).to eq(user_url(user))
 		end
 
-		it "by createing a new user with no username" do
+		it "by creating a new user with no username" do
 			fill_in 'Username', with: ''
 			fill_in 'Password', with: 'password'
 			fill_in 'Password Confirmation', with: 'password'
 			fill_in "Email", with: 'example@yahoo.com'
 		end
 
-		it "by creatgin a new user with no email address" do
+		it "by creating a new user with no email address" do
 			fill_in 'Username', with: 'ExampleUsername'
 			fill_in 'Password', with: 'password'
 			fill_in 'Password Confirmation', with: 'password'
