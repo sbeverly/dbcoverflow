@@ -62,7 +62,7 @@ describe UsersController do
 			it "does NOT save the new contact in the databse" do
 				expect {
 					post :create, user: FactoryGirl.attributes_for(:user, username: 'ex')
-					}.to change(User, :count).by(1)
+					}.to change(User, :count).by(0)
 			end
 
 			it "re-renders the :new template" do
