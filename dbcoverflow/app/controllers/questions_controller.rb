@@ -39,6 +39,7 @@ class QuestionsController < ApplicationController
 
 	def upvote
 		flash[:notice] = "your upvote has been recorded"
+		Vote.create()
 		redirect_to question_path(@question)
 	end
 
