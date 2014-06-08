@@ -39,14 +39,15 @@ class QuestionsController < ApplicationController
 	end
 
 	def upvote
-			@question.vote.score += 1
-			flash[:notice] = "your upvote has been recorded"
-			redirect_to question_path(@question)
+		@question.vote.score += 1
+		@question.vote.save
+		redirect_to question_path(@question)
 	end
 
 	def downvote
-			flash[:notice] = "your downvote has been recorded"
-			redirect_to question_path(@question)
+		@question.vote.score -= 1
+		@question.vote.save
+		redirect_to question_path(@question)
 	end
 
 	private
