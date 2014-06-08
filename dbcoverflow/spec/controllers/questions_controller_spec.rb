@@ -1,6 +1,4 @@
 require 'spec_helper'
-require_relative '../../app/controllers/questions_controller.rb'
-
 
 describe QuestionsController do
 

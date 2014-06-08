@@ -1,8 +1,8 @@
 require 'spec_helper'
 
-describe CommentsController do
+# describe CommentsController do
 	
 
 
 	
-end
+# end
