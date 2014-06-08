@@ -21,10 +21,10 @@
 	<ol>
 		<% @answers.each do |answer| %>
 				<li> 
-					<%= answer.body %><br>
+					<%= answer.body %> <%= link_to("delete", [@question, answer], method: :delete, confirm: 'Sure you want to deprive us of your wisdom?') %> <br>
 					<ul>
 						<% if answer.comments.empty? == false %>
-							<% answer.comments.each do |comment|  %>
+							<% answer.comments.each do |comment| %>
 								<li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
 							<% end %>
 						<% end %> 
@@ -32,6 +32,8 @@
 				</li>
 		<% end %>
 	</ol>
+	<% else %>
+	<h3> No one has provided an answer yet </h3>
 <% end %>
 
 <% if session[:user_id] != nil %>

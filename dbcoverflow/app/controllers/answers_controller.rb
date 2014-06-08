@@ -8,9 +8,10 @@ class AnswersController < ApplicationController
     redirect_to question_path(@question)
   end
 
-  def update
-  end
-
-  def delete
+  def destroy
+    @answer = Answer.find(params[:id])
+    @answer.destroy
+    
+    redirect_to question_path(params[:question_id])
   end
 end
