@@ -110,22 +110,22 @@ describe UsersController do
 
 	end
 
-	# describe "DELETE #destroy" do
+	describe "DELETE #destroy" do
 
-	# 	before :each do
-	# 		@user = FactoryGirl.create(:user)
-	# 	end
+		before :each do
+			@user = FactoryGirl.create(:user)
+		end
 
-	# 	it "deletes the user in the databse" do
-	# 		expect {
-	# 			delete :destroy, id: @user
-	# 		}.to change(User.count).by(-1)
-	# 	end
+		it "deletes the user in the databse" do
+			expect{
+				delete :destroy, id: @user
+			}.to change(User, :count).by(-1)
+		end
 
-	# 	it "redirects to questions#index" do
-	# 		# delete :destroy, id: @user
-	# 		# expect(response).to redirect_to questions_url
-	# 	end
-	# end
+		it "redirects to questions#index" do
+			# delete :destroy, id: @user
+			# expect(response).to redirect_to questions_url
+		end
+	end
 	
 end
