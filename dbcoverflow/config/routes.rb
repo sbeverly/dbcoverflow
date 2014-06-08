@@ -9,8 +9,10 @@ Dbcoverflow::Application.routes.draw do
     resources :comments 
   end
 
-  get "log_in" => "sessions/new", as: "log_in"
-  resources :sessions
+  get '/login' => 'sessions#new', :as => :login
+  post '/login' => 'sessions#create'
+  delete '/logout' => 'sessions#destroy'
+
 end
 
 
