@@ -12,8 +12,8 @@ Dbcoverflow::Application.routes.draw do
   post '/login' => 'sessions#create'
   delete '/logout' => 'sessions#destroy'
 
-  post '/questions/:id/upvote' => 'questions#upvote', :as => question_upvote
-  post '/questions/:id/downvote' => 'questions#downvote', :as => question_downvote
+  post '/questions/:id/upvote' => 'questions#upvote', :as => :question_upvote
+  post '/questions/:id/downvote' => 'questions#downvote', :as => :question_downvote
 
 end
 
