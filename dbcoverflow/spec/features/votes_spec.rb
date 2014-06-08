@@ -13,24 +13,24 @@ describe "Votes" do
 	describe "voting on questions" do
 
 		it "by voting up" do
-			click_link "q: Vote Up"
+			click_button "q: Vote Up"
 			expect(page).to have_content("q: 1")
 		end
 
 		it "by voting down" do
-			click_link "q: Vote Down"
+			click_button "q: Vote Down"
 			expect(page).to have_content("q: -1")
 		end
 	end
 
 	describe "voting on answers" do
 		it "by voting up" do
-			click_link "a: Vote Up"
+			click_button "a: Vote Up"
 			expect(page).to have_content("a: 1")
 		end
 
 		it "by voting down" do
-			click_link "q: Vote Down"
+			click_button "q: Vote Down"
 			expect(page).to have_content("a: -1")
 		end
 	end
