@@ -1,4 +1,5 @@
 <h1><%= @question.body %></h1>
+	<div id="add_comment_box_to_questions"></div>
 
 <% if @question.user_id == session[:user_id] %>
 	<%= link_to("edit", edit_question_path) %>
@@ -20,14 +21,19 @@
 	</ul>
 <% end %>
 
-<%= link_to "add comment", question_comments_path(@question), :remote => true %>
+<%= link_to "add comment", new_question_comment_path(@question), :remote => true %>
+
 
 <% if @answers.empty? == false %>
 	<h3>Answers</h3>
 	<ol>
 		<% @answers.each do |answer| %>
 				<li> 
-					<%= answer.body %> <%= link_to("delete", [@question, answer], method: :delete, confirm: 'Sure you want to deprive us of your wisdom?') %> <br>
+					<% answer_id = answer.id %>
+					<%= answer.body %> 
+					<div id="add_comment_box_to_answers_<%=answer_id%>"></div>
+
+					<%= link_to("delete", [@question, answer], method: :delete, confirm: 'Sure you want to deprive us of your wisdom?') %> <br>
 					<ul>
 						<% if answer.comments.empty? == false %>
 							<% answer.comments.each do |comment| %>
@@ -38,9 +44,13 @@
 				</li>
 		<% end %>
 	</ol>
+
+	<%= link_to "add comment", new_answer_comment_path(answer_id), :remote => true %> <br>
 	<% else %>
 	<h3> No one has provided an answer yet </h3>
 <% end %>
+
+
 
 <% if session[:user_id] != nil %>
 	<%= form_for [@question, @answer] do |f| %>
@@ -51,8 +61,3 @@
 <% else %>
 	<p> Login to post an answer! </p>
 <% end %>
-<!-- ##adding comment to the QUESTION -->
-<%#= link_to "add comment", comments_show_comment_path,  :id => "question_comment_link", :remote => true  %>
-
-
-

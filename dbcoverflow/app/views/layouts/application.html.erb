@@ -5,18 +5,38 @@
 
 
 	<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,700,800" rel="stylesheet" type="text/css">
 	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-	<%= javascript_include_tag "comment" %>
 	<%= javascript_include_tag "vote" %>
 	<%= csrf_meta_tags %>
 </head>
 <body>
+
+
+	<div id="top-bar">
+		<nav>
+				<ul>
+					<li id="name"><%= link_to "DBC-OVERFLOW", root_path %></li>
+					<% if session[:user_id] %>
+					<%= link_to "My Profile", user_path(@session) %>
+					<%= link_to "Logout", logout_path, method: :delete %>
+					<% else %>
+						<%= link_to "Login", login_path %>
+						<%= link_to "Signup", new_user_path %>
+					<% end %>
+				</ul>
+		</nav>
+	</div>
+
+
+
 
 <% flash.each do |key, value| %>
 	<div class='flash' id='<%= key %>'>
 		<%= value %>
 	</div>
 <% end %>
+
 
 <%= yield %>
 </body>

@@ -1,7 +1,6 @@
-<%= form_for [Question.find(params[:question_id]),Comment.new] do |f| %>
+<%= form_for [@commentable, Comment.new] do |f| %>
   <%= f.text_area :body %>
   <%= f.submit "submit" %>
-
 <% end %>
 
 
