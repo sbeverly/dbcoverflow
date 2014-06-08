@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Dbcoverflow</title>
+	<title>DBC Overflow</title>
 
 
 	<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
-	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,700,800" rel="stylesheet" type="text/css">
+	<%= stylesheet_link_tag 'application', "http://fonts.googleapis.com/css?family=Open+Sans:300,700,800" %>
 	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	<%= javascript_include_tag "vote" %>
 	<%= csrf_meta_tags %>
@@ -18,10 +18,11 @@
 				<ul>
 					<li id="name"><%= link_to "DBC-OVERFLOW", root_path %></li>
 					<% if session[:user_id] %>
-						<li><a href='/logout'>log out</a></li>
+					<%= link_to "My Profile", user_path(@session) %>
+					<%= link_to "Logout", logout_path, method: :delete %>
 					<% else %>
-						<li><a href='/signup'>sign up</a></li>
-						<li><a href='/login'>log in</a></li>
+						<%= link_to "Login", login_path %>
+						<%= link_to "Signup", new_user_path %>
 					<% end %>
 				</ul>
 		</nav>
