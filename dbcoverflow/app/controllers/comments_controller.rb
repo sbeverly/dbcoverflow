@@ -1,7 +1,18 @@
 class CommentsController < ApplicationController
   
   def index
-    @commentable =  Question.find(params[:question_id])
+    # @commentable =  Question.find(params[:question_id])
+
+    # # p @commentable
+    # # p "******"
+    # respond_to do |format|
+    #   format.js { render :show_comment, :locals => {:commentable => @commentable}}
+    # end
+  end
+
+
+  def show_comment
+     @commentable =  Question.find(params[:question_id])
 
     # p @commentable
     # p "******"
@@ -9,15 +20,10 @@ class CommentsController < ApplicationController
       format.js { render :show_comment, :locals => {:commentable => @commentable}}
     end
   end
-
+  
 
   def new
     @comment = Comment.new 
-    
-    # respond_to do |format|
-    #   format.js 
-    # end
-
   end
 
 

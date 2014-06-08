@@ -1,2 +1,5 @@
+<%# if @commentable.include? question_id %> 
 $('#add_comments').html("<%= escape_javascript(render(:partial => "show_comment")) %>");
-
+<%# else %>
+	// $('#add_comments_to_answers').html("<%= escape_javascript(render(:partial => "show_comment")) %>");
+<%# end %>
