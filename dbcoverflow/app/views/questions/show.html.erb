@@ -28,6 +28,8 @@
 		<% @answers.each do |answer| %>
 				<li> 
 					<%= answer.body %> <%= link_to("delete", [@question, answer], method: :delete, confirm: 'Sure you want to deprive us of your wisdom?') %> <br>
+					<%= link_to "Up", answer_upvote_path, method: :post, class: "up_button" %>
+					<%= link_to "Down", answer_downvote_path, method: :post, class: "down_button" %>
 					<ul>
 						<% if answer.comments.empty? == false %>
 							<% answer.comments.each do |comment| %>
