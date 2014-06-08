@@ -26,6 +26,7 @@ ActiveRecord::Schema.define(version: 20140121182931) do
 
   create_table "comments", force: true do |t|
     t.string   "body"
+    t.integer  "user_id"
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.datetime "created_at"
@@ -51,7 +52,6 @@ ActiveRecord::Schema.define(version: 20140121182931) do
     t.integer  "score",        default: 0
     t.integer  "votable_id"
     t.string   "votable_type"
-    t.integer  "user_id"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
