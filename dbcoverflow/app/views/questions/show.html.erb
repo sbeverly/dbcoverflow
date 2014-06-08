@@ -3,25 +3,16 @@
 
 <%= @question.body %>
 	<div id="comments">
+		<% @question.comments.each do |comment| %>
+			<%= comment.body %>
+		<% end %>
 	</div>
 
- <div id="add_comments">
 
- </div>
-
-
-<!-- ##adding comment to the QUESTION -->
-<%#= link_to "add comment", comments_show_comment_path,  :id => "question_comment_link", :remote => true  %>
+<div id="add_comments"> </div>
 
 
-<%= link_to "add comment", question_comments_path(@question), :remote => true %>
 
 
-<%= form_for @answer do |f| %>
-	<%= f.label :answer %>
-	<%= f.text_field :body %>
-	<%= f.submit "submit answer"%>
-<% end %>
+<%= link_to "add comment for question", question_comments_path(@question), :remote => true %>
 
-
-@question.answers.each do |answer|
