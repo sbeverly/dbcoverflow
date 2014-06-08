@@ -50,7 +50,7 @@ ActiveRecord::Schema.define(version: 20140121182931) do
   end
 
   create_table "votes", force: true do |t|
-    t.integer  "score"
+    t.integer  "score",        default: 0
     t.integer  "votable_id"
     t.string   "votable_type"
     t.integer  "user_id"
