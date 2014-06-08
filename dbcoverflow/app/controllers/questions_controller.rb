@@ -52,7 +52,8 @@ class QuestionsController < ApplicationController
 		if logged_in?
 			flash[:notice] = "your downvote has been recorded"
 			redirect_to question_path(@question)
-			
+		end
+
 	end
 
 	private
