@@ -12,6 +12,8 @@
 	</ul>
 <% end %>
 
+<%= link_to "add comment", question_comments_path(@question), :remote => true %>
+
 <% if @answers.empty? == false %>
 	<h3>Answers</h3>
 	<ol>
@@ -29,3 +31,15 @@
 		<% end %>
 	</ol>
 <% end %>
+
+<%= form_for @answer do |f| %>
+	<%= f.label :answer %>
+	<%= f.text_field :body %>
+	<%= f.submit "submit answer"%>
+<% end %>
+
+<!-- ##adding comment to the QUESTION -->
+<%#= link_to "add comment", comments_show_comment_path,  :id => "question_comment_link", :remote => true  %>
+
+
+

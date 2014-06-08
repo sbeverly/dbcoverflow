@@ -7,6 +7,8 @@ class QuestionsController < ApplicationController
 	def show
 		@question = Question.find(params[:id])
 		@answers = @question.answers
+	    @comment = Comment.new
+	    @answer = Answer.new
 	end
 
 	def create
@@ -31,5 +33,11 @@ class QuestionsController < ApplicationController
 		@question.destroy
 
 		redirect_to root_path
+	end
+
+	private
+
+	def question_params
+		params.require(:question).permit(:body)
 	end
 end

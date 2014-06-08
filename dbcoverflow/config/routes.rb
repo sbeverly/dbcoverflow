@@ -4,7 +4,10 @@ Dbcoverflow::Application.routes.draw do
   resources :users
   resources :comments
   resources :votes
+  resources :answers
   resources :questions do
-    resources :answers
+    resources :comments 
   end
 end
+
+
