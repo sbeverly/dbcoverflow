@@ -23,10 +23,6 @@
 	<% @questions.each do |question| %>
 		<li> 
 			<a href="/questions/<%= question.id %>", class='edit-link'><%= question.body %></a> - Answers(<%= question.answers.count %>)<br>
-			<% if question.user_id == session[:id] %>
-				<a href="/questions/<%= question.id %>/edit", class='edit-link'> edit </a> - 
-				<%= link_to "delete", question, method: :delete, data: { confirm: "Delete this question?" } %>
-			<% end %>
 		</li>
 	<% end %>
 </ul>

@@ -1,10 +1,15 @@
 <h1><%= @question.body %></h1>
+
+<% if @question.user_id == session[:user_id] %>
+	<%= link_to("edit", edit_question_path) %>
+	<%= link_to "delete", @question, method: :delete, data: { confirm: "Delete this question?" } %>
+<% end %>
+
 <%= link_to "Up", question_upvote_path, method: :post, class: "up_button" %>
 <%= @question.vote.score %>
 <%= link_to "Down", question_downvote_path, method: :post, class: "down_button" %>
 <br>
 <br>
-
 
 <% unless @question.comments.empty? %>
 	<h3> Comments on Question </h3>
@@ -22,10 +27,10 @@
 	<ol>
 		<% @answers.each do |answer| %>
 				<li> 
-					<%= answer.body %><br>
+					<%= answer.body %> <%= link_to("delete", [@question, answer], method: :delete, confirm: 'Sure you want to deprive us of your wisdom?') %> <br>
 					<ul>
 						<% if answer.comments.empty? == false %>
-							<% answer.comments.each do |comment|  %>
+							<% answer.comments.each do |comment| %>
 								<li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
 							<% end %>
 						<% end %> 
@@ -33,14 +38,19 @@
 				</li>
 		<% end %>
 	</ol>
+	<% else %>
+	<h3> No one has provided an answer yet </h3>
 <% end %>
 
-<%= form_for @answer do |f| %>
-	<%= f.label :answer %>
-	<%= f.text_field :body %>
-	<%= f.submit "submit answer"%>
+<% if session[:user_id] != nil %>
+	<%= form_for [@question, @answer] do |f| %>
+		<%= f.label :answer %>
+		<%= f.text_field :body %>
+		<%= f.submit "submit answer"%>
+	<% end %>
+<% else %>
+	<p> Login to post an answer! </p>
 <% end %>
-
 <!-- ##adding comment to the QUESTION -->
 <%#= link_to "add comment", comments_show_comment_path,  :id => "question_comment_link", :remote => true  %>
 
