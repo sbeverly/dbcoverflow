@@ -11,3 +11,8 @@
  *= require_self
  *= require_tree .
  */
+
+
+require_normalize.css
+require_navbar.css
+require_comments.css

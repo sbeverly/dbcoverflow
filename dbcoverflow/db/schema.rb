@@ -19,7 +19,6 @@ ActiveRecord::Schema.define(version: 20140121182931) do
   create_table "answers", force: true do |t|
     t.integer  "question_id"
     t.integer  "required_id"
-    t.integer  "user_id"
     t.string   "body"
     t.datetime "created_at"
     t.datetime "updated_at"
@@ -27,7 +26,6 @@ ActiveRecord::Schema.define(version: 20140121182931) do
 
   create_table "comments", force: true do |t|
     t.string   "body"
-    t.integer  "user_id"
     t.integer  "commentable_id"
     t.string   "commentable_type"
     t.datetime "created_at"
