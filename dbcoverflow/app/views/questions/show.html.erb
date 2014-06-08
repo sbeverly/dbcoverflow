@@ -1,8 +1,15 @@
 <h1><%= @question.body %></h1>
+
+<% if @question.user_id == session[:user_id] %>
+	<%= link_to("edit", edit_question_path) %>
+	<%= link_to "delete", @question, method: :delete, data: { confirm: "Delete this question?" } %>
+<% end %>
+
 <%= render 'up_vote' %>
 <%= render 'down_vote' %>
 <br>
 <br>
+
 
 
 <% unless @question.comments.empty? %>
