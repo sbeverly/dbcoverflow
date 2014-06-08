@@ -1,6 +1,5 @@
 class QuestionsController < ApplicationController	
 	before_action :find_question, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
-	before_action :logged_in?, only: [:upvote, :downvote]
 
 	def index
 		if session[:user_id]
@@ -39,14 +38,21 @@ class QuestionsController < ApplicationController
 	end
 
 	def upvote
-		flash[:notice] = "your upvote has been recorded"
-		@question << Vote.create()
-		redirect_to question_path(@question)
+		if logged_in?
+			flash[:notice] = "your upvote has been recorded"
+			@question.votes << Vote.create(user_id: session[:user_id])
+			redirect_to question_path(@question)
+		else
+			flash[:alert] = "You must be logged in to vote."
+			redirect_to question_path(@question)
+		end
 	end
 
 	def downvote
-		flash[:notice] = "your downvote has been recorded"
-		redirect_to question_path(@question)
+		if logged_in?
+			flash[:notice] = "your downvote has been recorded"
+			redirect_to question_path(@question)
+			
 	end
 
 	private
@@ -57,5 +63,13 @@ class QuestionsController < ApplicationController
 
 	def find_question
 		@question = Question.find(params[:id])
+	end
+
+	def logged_in?
+		if session[:user_id]
+			return true
+		else
+			return false
+		end
 	end
 end
