@@ -5,8 +5,8 @@ class SessionsController < ApplicationController
 	end
 
 	def create
-		puts params
-		if user = User.authenticate(params[:username], params[:password])
+		user = User.find_by_username(params[:username])
+		if user.authenticate(params[:password])
 			session[:user_id] = user.id
 			redirect_to questions_url, notice: "Logged In!"
 		else
