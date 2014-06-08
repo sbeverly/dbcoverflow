@@ -23,7 +23,7 @@ describe "User" do
 				click_button 'Save'
 
 				user = User.where(username: 'ExampleUsername').first
-				expect(page.current_url).to eq(user_url(user))
+				expect(page.current_url).to questions_url
 			end
 		end
 

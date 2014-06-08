@@ -16,7 +16,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 
 		if @user.save
-			redirect_to user_path(@user)
+			redirect_to questions_path
 		else
 			flash[:alert] = "Dude. Enter the correct info yo."
 			redirect_to new_user_path
@@ -29,7 +29,7 @@ class UsersController < ApplicationController
 	def update
 		if @user.update(user_params)
 			flash[:notice] = "User has been updated."
-			redirect_to user_path(@user)
+			redirect_to questions_path
 		else
 			flash[:alert] = "User has not been updated ya idiot."
 			redirect_to edit_user_path

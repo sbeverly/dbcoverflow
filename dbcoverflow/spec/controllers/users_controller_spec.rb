@@ -54,7 +54,7 @@ describe UsersController do
 
 			it "redirects to users#show" do
 				post :create, user: FactoryGirl.attributes_for(:user)
-				expect(response).to redirect_to user_path(assigns[:user])
+				expect(response).to redirect_to questions_url
 			end
 		end
 
@@ -105,7 +105,7 @@ describe UsersController do
 
 		it "redirects to users#show" do
 			patch :update, id: @user, user: FactoryGirl.attributes_for(:user)
-			expect(response).to redirect_to @user
+			expect(response).to redirect_to questions_url
 		end
 
 	end
