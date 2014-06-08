@@ -1,5 +1,6 @@
 <h1><%= @question.body %></h1>
 <%= link_to "Up", question_upvote_path, method: :post %>
+<%= @question.votes.count %>
 <%= link_to "Down", question_downvote_path, method: :post %>
 <br>
 <br>
