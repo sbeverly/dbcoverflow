@@ -1,5 +1,7 @@
 <h1> Questions </h1>
 
+<%= link_to "Create New User", new_user_path %>
+
 <div class='new-question'>
 	<h2>Ask a Question:</h2>
 
@@ -15,7 +17,7 @@
 			<a href="/questions/<%= question.id %>", class='edit-link'><%= question.body %></a> - Answers(<%= question.answers.count %>)<br>
 			<% if question.user_id == session[:id] %>
 				<a href="/questions/<%= question.id %>/edit", class='edit-link'> edit </a> - 
-				<%= link_to("delete", question, method: :delete, confirm: "Delete this question?") %>
+				<%= link_to "delete", question, method: :delete, data: { confirm: "Delete this question?" } %>
 			<% end %>
 		</li>
 	<% end %>

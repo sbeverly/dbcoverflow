@@ -4,13 +4,9 @@ describe "User" do
 
 	describe "New User" do
 
-		# before :each do
-		# 	visit questions_url
-		# 	click_link "Create New User"
-		# end
-
 		before :each do
-			visit new_user_url
+			visit questions_url
+			click_link "Create New User"
 		end
 
 		context "can create a new account with VALID attr" do
@@ -99,9 +95,9 @@ describe "User" do
 
 		context "can delete a user" do
 			it "by clicking the 'delete user' button " do
-				# click_link "Delete Account"
-				# expect(page.current_url).to eq(questions_url)
-				# expect(page).to have_content('Say bye bye.')
+				click_link "Delete Account"
+				expect(page.current_url).to eq(questions_url)
+				expect(page).to have_content('Say bye bye.')
 			end
 		end
 	end

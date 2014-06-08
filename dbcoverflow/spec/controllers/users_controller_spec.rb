@@ -123,8 +123,8 @@ describe UsersController do
 		end
 
 		it "redirects to questions#index" do
-			# delete :destroy, id: @user
-			# expect(response).to redirect_to questions_url
+			delete :destroy, id: @user
+			expect(response).to redirect_to questions_url
 		end
 	end
 	
