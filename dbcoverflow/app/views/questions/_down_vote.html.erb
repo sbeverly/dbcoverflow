@@ -1,0 +1,5 @@
+<%= form_for(@vote) do |f| %>
+		<%= f.text_field :score, input_html: { value: -1 }, type: :hidden %>
+		<%= f.submit :Down, class: "down_voting button" %>
+<% end %>
+  
