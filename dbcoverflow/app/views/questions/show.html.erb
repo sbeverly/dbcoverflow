@@ -34,12 +34,15 @@
 	</ol>
 <% end %>
 
-<%= form_for @answer do |f| %>
-	<%= f.label :answer %>
-	<%= f.text_field :body %>
-	<%= f.submit "submit answer"%>
+<% if session[:user_id] != nil %>
+	<%= form_for [@question, @answer] do |f| %>
+		<%= f.label :answer %>
+		<%= f.text_field :body %>
+		<%= f.submit "submit answer"%>
+	<% end %>
+<% else %>
+	<p> Login to post an answer! </p>
 <% end %>
-
 <!-- ##adding comment to the QUESTION -->
 <%#= link_to "add comment", comments_show_comment_path,  :id => "question_comment_link", :remote => true  %>
 

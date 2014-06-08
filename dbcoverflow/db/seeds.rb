@@ -1,6 +1,6 @@
 require 'faker'
 
-10.times { @user = User.create(username: Faker::Name.first_name, email: Faker::Internet.email) }
+10.times { @user = User.create(username: Faker::Name.first_name, email: Faker::Internet.email, password: '123456', pa) }
 
 @users = User.all
 
