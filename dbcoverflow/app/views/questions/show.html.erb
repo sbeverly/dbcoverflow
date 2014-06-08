@@ -14,4 +14,14 @@
 <%#= link_to "add comment", comments_show_comment_path,  :id => "question_comment_link", :remote => true  %>
 
 
-<%= link_to "add comment", show_comment_question_path, :remote => true %>
+<%= link_to "add comment", question_comments_path(@question), :remote => true %>
+
+
+<%= form_for @answer do |f| %>
+	<%= f.label :answer %>
+	<%= f.text_field :body %>
+	<%= f.submit "submit answer"%>
+<% end %>
+
+
+@question.answers.each do |answer|

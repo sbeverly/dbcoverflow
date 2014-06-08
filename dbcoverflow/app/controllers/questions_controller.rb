@@ -15,23 +15,10 @@ class QuestionsController < ApplicationController
   def show
     @question = Question.find(params[:id])
     @comment = Comment.new
-
+    @answer = Answer.new
   end
 
 
-
-  def show_comment
-    
-    @comment = Comment.new 
-  
-  
-    respond_to do |format|
-      format.js 
-    end
-
-  end
-
-  
   private
 
   def question_params

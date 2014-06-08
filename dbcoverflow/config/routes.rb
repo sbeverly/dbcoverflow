@@ -3,7 +3,8 @@ Dbcoverflow::Application.routes.draw do
   resources :user
   resources :comments
   resources :votes
-  resources :questions 
+  resources :answers
+  # resources :questions 
     # resources :answers
   root :to => "questions#new"
   
@@ -14,13 +15,18 @@ Dbcoverflow::Application.routes.draw do
   # match 'questions/show_comment', to:  'questions#show_comment', via: get
 
   resources :questions do
-    member do
-      get 'show_comment'
-    end
+    resources :comments 
   end
 
+
+  #get '/questions/:id/show_comment' => "comments#show"
+
+
   # resources :questions do
-  #   resources :comments 
+  #   member do
+  #     get 'show_comment'
+  #   end
   # end
+
 
 end

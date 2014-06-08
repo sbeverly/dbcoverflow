@@ -1,4 +1,2 @@
-// $('a[data-update-target]').live('ajax:success', function(evt, data){
-// 		var target = $(this).data('add-comment');
-// 		$('#' + target).html(data);
-// 	});
+$('#add_comments').html("<%= escape_javascript(render(:partial => "show_comment")) %>");
+
