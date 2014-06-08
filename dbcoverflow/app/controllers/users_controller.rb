@@ -16,6 +16,7 @@ class UsersController < ApplicationController
 		@user = User.new(user_params)
 
 		if @user.save
+			session[:user_id] = @user.id
 			redirect_to questions_path
 		else
 			flash[:alert] = "Dude. Enter the correct info yo."
@@ -38,6 +39,7 @@ class UsersController < ApplicationController
 
 	def destroy
 		@user.destroy
+		session[:user_id] = nil
 		flash[:notice] = "Say bye bye."
 		redirect_to questions_path
 	end
