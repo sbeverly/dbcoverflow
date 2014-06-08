@@ -5,10 +5,27 @@
 
 
 	<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,700,800" rel="stylesheet" type="text/css">
 	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	<%= csrf_meta_tags %>
 </head>
 <body>
+
+	<div id="top-bar">
+		<nav>
+				<ul>
+					<li id="name"><%= link_to "DBC-OVERFLOW", root_path %></li>
+					<% if session[:user_id] %>
+						<li><a href='/logout'>log out</a></li>
+					<% else %>
+						<li><a href='/signup'>sign up</a></li>
+						<li><a href='/login'>log in</a></li>
+					<% end %>
+				</ul>
+		</nav>
+	</div>
+
+
 
 	<%= yield %>
 
