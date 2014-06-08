@@ -39,6 +39,7 @@ class UsersController < ApplicationController
 
 	def destroy
 		@user.destroy
+		session[:user_id] = nil
 		flash[:notice] = "Say bye bye."
 		redirect_to questions_path
 	end
