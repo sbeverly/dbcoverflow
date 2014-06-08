@@ -8,6 +8,9 @@ Dbcoverflow::Application.routes.draw do
   resources :questions do
     resources :comments 
   end
+
+  get "log_in" => "sessions/new", as: "log_in"
+  resources :sessions
 end
 
 

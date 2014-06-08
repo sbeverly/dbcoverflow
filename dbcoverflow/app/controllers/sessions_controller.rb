@@ -2,8 +2,11 @@ class SessionsController < ApplicationController
 
 	def create
 		if user = User.authenticate(params[:username], params[:password])
-			session[:current_user_id] = user.id
-			redirect_to questions_url
+			session[:user_id] = user.id
+			redirect_to questions_url, notice: "Logged In!"
+		else
+			flash.now.alert = "Invalid Email or Password"
+			render 'user_login'
 		end
 	end
 
