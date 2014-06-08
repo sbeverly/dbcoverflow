@@ -1,8 +1,8 @@
-<h2>show the question</h2>
+<h2>question page:</h2>
 
-
+<b>this is the question:</b><br>
 <%= @question.body %><br>
-<div id="add_comments"> </div>
+	<div id="add_comment_box_to_questions"> </div>
 
 
 	<div id="comments"><br>
@@ -10,7 +10,7 @@
 		<% @question.comments.each do |comment| %>
 			<%= comment.body %><br>
 		<% end %><br>
-	<%= link_to "add comment for question", show_comment_path(@question), :remote => true %>
+	<%= link_to "add comment for question", new_question_comment_path(@question), :remote => true %>
 	</div>
 
 
@@ -22,22 +22,23 @@
 
 <br><br>
 <b>these are answers:</b><br>
-<% answers = ['pretend this is an answer', 'this toooo', 'yup'] %>
-<% answers.each do |answer| %>
-	<%= answer %><br>
-	<div id ="add_comments_to_answers">
-	</div>
-	<%= link_to "add comment for answer", show_comment_path(@question), :remote => true %><br><br>
+
+	<% @question.answers.each do |answer| %>
+		<% answer_id = answer.id %>
+		<% @answer = answer %>
+		<%= answer.body %><br>
+		<div id ="add_comment_box_to_answers_<%=answer_id%>" >
+		</div><br>
+
+		<div id = "comments">
+			<%= render template: "comments/answers_comments", locals: {answer: @answer} %><br>
+
+			<%= link_to "add comment for answer", new_answer_comment_path(answer_id), :remote => true %><br><br>
+		</div>
 <% end %>
 
 
 
 
-
-<h2>your answer</h2>
-<%= form_for @answer do |f| %>
-	<%= f.text_field :body %>
-	<%= f.submit "submit answer"%>
-<% end %>
 
 

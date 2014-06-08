@@ -1,0 +1,5 @@
+<% if @answer.comments %>
+	<% @answer.comments.each do |comment| %>
+		<%= comment.body %><br>
+	<% end %>
+<% end %>
