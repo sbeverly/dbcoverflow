@@ -1,42 +1,63 @@
-<h2>question page:</h2>
+<h1><%= @question.body %></h1>
+	<div id="add_comment_box_to_questions"></div>
 
-<b>this is the question:</b><br>
-<%= @question.body %><br>
-	<div id="add_comment_box_to_questions"> </div>
+<% if @question.user_id == session[:user_id] %>
+	<%= link_to("edit", edit_question_path) %>
+	<%= link_to "delete", @question, method: :delete, data: { confirm: "Delete this question?" } %>
+<% end %>
 
+<%= link_to "Up", question_upvote_path, method: :post, class: "up_button" %>
+<%= @question.vote.score %>
+<%= link_to "Down", question_downvote_path, method: :post, class: "down_button" %>
+<br>
+<br>
 
-	<div id="comments"><br>
-		<b>these are comments for q:</b><br>
+<% unless @question.comments.empty? %>
+	<h3> Comments on Question </h3>
+	<ul>
 		<% @question.comments.each do |comment| %>
-			<%= comment.body %><br>
-		<% end %><br>
-	<%= link_to "add comment for question", new_question_comment_path(@question), :remote => true %>
-	</div>
+			<li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
+		<% end %>
+	</ul>
+<% end %>
+
+<%= link_to "add comment", new_question_comment_path(@question), :remote => true %>
 
 
+<% if @answers.empty? == false %>
+	<h3>Answers</h3>
+	<ol>
+		<% @answers.each do |answer| %>
+				<li> 
+					<% answer_id = answer.id %>
+					<%= answer.body %> 
+					<div id="add_comment_box_to_answers_<%=answer_id%>"></div>
 
+					<%= link_to("delete", [@question, answer], method: :delete, confirm: 'Sure you want to deprive us of your wisdom?') %> <br>
+					<ul>
+						<% if answer.comments.empty? == false %>
+							<% answer.comments.each do |comment| %>
+								<li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
+							<% end %>
+						<% end %> 
+					</ul>
+				</li>
+		<% end %>
+	</ol>
 
-
-
-
-
-<br><br>
-<b>these are answers:</b><br>
-
-	<% @question.answers.each do |answer| %>
-		<% answer_id = answer.id %>
-		<% @answer = answer %>
-		<%= answer.body %><br>
-		<div id ="add_comment_box_to_answers_<%=answer_id%>" >
-		</div><br>
-
-		<div id = "comments">
-			<%= render template: "comments/answers_comments", locals: {answer: @answer} %><br>
-
-			<%= link_to "add comment for answer", new_answer_comment_path(answer_id), :remote => true %><br><br>
-		</div>
+	<%= link_to "add comment", new_answer_comment_path(answer_id), :remote => true %> <br>
+	<% else %>
+	<h3> No one has provided an answer yet </h3>
 <% end %>
 
 
 
-
+<% if session[:user_id] != nil %>
+	<%= form_for [@question, @answer] do |f| %>
+		<%= f.label :answer %>
+		<%= f.text_field :body %>
+		<%= f.submit "submit answer"%>
+	<% end %>
+<% else %>
+	<p> Login to post an answer! </p>
+<% end %>

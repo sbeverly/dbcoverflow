@@ -18,7 +18,7 @@ describe Question do
   end
 
   context "#add" do
-    let(:user) {User.new(username: "bobby", email: "bobby@gmail.com", password_hash: "pimpcity")};
+    let(:user) {FactoryGirl.create(:user)};
     let(:question) { Question.new(body: "My List")};
     it "should add a question to a user" do
       user.questions << question

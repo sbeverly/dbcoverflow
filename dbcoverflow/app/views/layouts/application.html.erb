@@ -7,9 +7,11 @@
 	<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
 	<link href="http://fonts.googleapis.com/css?family=Open+Sans:300,700,800" rel="stylesheet" type="text/css">
 	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "vote" %>
 	<%= csrf_meta_tags %>
 </head>
 <body>
+
 
 	<div id="top-bar">
 		<nav>
@@ -27,7 +29,14 @@
 
 
 
-	<%= yield %>
 
+<% flash.each do |key, value| %>
+	<div class='flash' id='<%= key %>'>
+		<%= value %>
+	</div>
+<% end %>
+
+
+<%= yield %>
 </body>
 </html>

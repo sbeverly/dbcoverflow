@@ -42,13 +42,13 @@ ActiveRecord::Schema.define(version: 20140121182931) do
   create_table "users", force: true do |t|
     t.string   "username"
     t.string   "email"
-    t.string   "password_hash"
+    t.string   "password_digest"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
 
   create_table "votes", force: true do |t|
-    t.integer  "score"
+    t.integer  "score",        default: 0
     t.integer  "votable_id"
     t.string   "votable_type"
     t.integer  "user_id"

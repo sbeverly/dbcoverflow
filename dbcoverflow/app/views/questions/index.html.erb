@@ -1,0 +1,28 @@
+<% if @session %>
+	<h4>~ Welcome <%= @session.username %> ~</h4> 
+	<%= link_to "My Profile", user_path(@session) %>
+	<%= link_to "Logout", logout_path, method: :delete %>
+<% else %>
+	<%= link_to "Login", login_path %>
+	<%= link_to "Create New User", new_user_path %>
+<% end %>
+
+
+<h1> Questions </h1>
+
+<div class='new-question'>
+	<h2>Ask a Question:</h2>
+
+	<%= form_for @question do |f| %>
+		<%= f.text_area	:body %>
+		<%= f.submit "Post Question" %>
+	<% end %>
+</div>
+
+<ul>
+	<% @questions.each do |question| %>
+		<li> 
+			<a href="/questions/<%= question.id %>", class='edit-link'><%= question.body %></a> - Answers(<%= question.answers.count %>)<br>
+		</li>
+	<% end %>
+</ul>

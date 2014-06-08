@@ -1,14 +1,15 @@
 Dbcoverflow::Application.routes.draw do
+  root to: 'questions#index'
 
-  resources :user
-  resources :comments
+  resources :users
   resources :votes
   resources :answers
-  root :to => "questions#new"
-  
+
   resources :questions do
+    resources :answers
     resources :comments 
   end
+
 
   resources :answers do
     resources :comments
@@ -16,5 +17,11 @@ Dbcoverflow::Application.routes.draw do
 
   get '/questions/:question_id/show_comment', to: 'comments#show_comment', as: 'show_comment'
 
-# GET '/questions/:question_id/answers/answer_id/show_comment'
+  get '/login' => 'sessions#new', :as => :login
+  post '/login' => 'sessions#create'
+  delete '/logout' => 'sessions#destroy'
+
+  post '/questions/:id/upvote' => 'questions#upvote', :as => :question_upvote
+  post '/questions/:id/downvote' => 'questions#downvote', :as => :question_downvote
 end
+
