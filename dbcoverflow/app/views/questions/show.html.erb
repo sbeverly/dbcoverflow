@@ -1,6 +1,7 @@
 <h1><%= @question.body %></h1>
-<%= render 'up_vote' %>
-<%= render 'down_vote' %>
+<%= link_to "Up", question_upvote_path, method: :post %>
+<%= @question.vote.score %>
+<%= link_to "Down", question_downvote_path, method: :post %>
 <br>
 <br>
 
