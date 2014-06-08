@@ -31,7 +31,7 @@ class CommentsController < ApplicationController
     p "you got here!!!!"
     # p comment
     p "*"
-    redirect_to root_path
+    redirect_to question_path(question)
 
   end
 
