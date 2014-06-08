@@ -1,4 +1,6 @@
 class QuestionsController < ApplicationController	
+	before_action :find_question, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+
 	def index
 		if session[:user_id]
 			@session = User.find(session[:user_id])
@@ -8,7 +10,6 @@ class QuestionsController < ApplicationController
 	end
 
 	def show
-		@question = Question.find(params[:id])
 		@answers = @question.answers
 		@vote = Vote.new
 	    @comment = Comment.new
@@ -17,15 +18,14 @@ class QuestionsController < ApplicationController
 
 	def create
 		@question = Question.create(body: params[:question][:body])
+		@question.vote = Vote.create
 		redirect_to root_path
 	end
 
 	def edit
-		@question = Question.find(params[:id])
 	end
 
 	def update
-		@question = Question.find(params[:id])
 		@question.body = params[:question][:body]
 		@question.save
 
@@ -33,10 +33,21 @@ class QuestionsController < ApplicationController
 	end
 
 	def destroy
-		@question = Question.find(params[:id])
 		@question.destroy
 
 		redirect_to root_path
+	end
+
+	def upvote
+		@question.vote.score += 1
+		@question.vote.save
+		redirect_to question_path(@question)
+	end
+
+	def downvote
+		@question.vote.score -= 1
+		@question.vote.save
+		redirect_to question_path(@question)
 	end
 
 	private
@@ -44,4 +55,9 @@ class QuestionsController < ApplicationController
 	def question_params
 		params.require(:question).permit(:body)
 	end
+
+	def find_question
+		@question = Question.find(params[:id])
+	end
+
 end

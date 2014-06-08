@@ -5,12 +5,11 @@
 	<%= link_to "delete", @question, method: :delete, data: { confirm: "Delete this question?" } %>
 <% end %>
 
-<%= render 'up_vote' %>
-<%= render 'down_vote' %>
+<%= link_to "Up", question_upvote_path, method: :post, class: "up_button" %>
+<%= @question.vote.score %>
+<%= link_to "Down", question_downvote_path, method: :post, class: "down_button" %>
 <br>
 <br>
-
-
 
 <% unless @question.comments.empty? %>
 	<h3> Comments on Question </h3>
