@@ -1,39 +1,54 @@
 require 'spec_helper'
 
-
 describe User do
-  context "#initialize" do
-    let(:user) {User.new(email: "Reid@shopcube.com", username: "reidcovington")}
-    it "should create a new instance of User" do
-      user.should be_an_instance_of User
+
+  describe "create User" do
+
+    it " is valid by creating a new instance of User" do
+      user = FactoryGirl.build(:user)
+      expect(user).to be_valid
     end
-    it "should increase the number of users" do
-      expect{user.save}.to change{User.count}.by(1)
+
+    it "is invalid without a username" do
+      expect(User.new(username: '', password: 'password', password_confirmation: 'password', email: 'email2@yahoo.com')).to have(2).errors_on(:username)
+    end
+
+    it "is invalid without a unique username" do
+      User.create(username: 'alexander', password: 'password', password_confirmation: 'password', email: 'email1@yahoo.com')
+      expect(User.new(username: 'alexander', password: 'password', password_confirmation: 'password', email: 'email2@yahoo.com')).to have(1).errors_on(:username)
+    end
+
+    it "is invalid without a username greater than 3 chars" do
+      expect(User.new(username: 'al', password: 'password', password_confirmation: 'password', email: 'email@yahoo.com')).to have(1).errors_on(:username)
+    end
+
+    it "is invalid without an email" do
+      expect(User.new(username: 'alexander', password: 'password', password_confirmation: 'password', email: '')).to have(2).errors_on(:email)
+    end
+
+    it "is invalid without a unique email" do
+      User.create(username: 'alexander', password: 'password', password_confirmation: 'password', email: 'email@yahoo.com')
+      expect(User.new(username: 'alexander', password: 'password', password_confirmation: 'password', email: 'email@yahoo.com')).to have(1).errors_on(:email)
+    end
+
+    it "is invalid without a correctly formatted email" do
+      expect(User.new(username: 'alexander', password: 'password', password_confirmation: 'password', email: 'yahoo.com')).to have(1).errors_on(:email)
+    end
+
+    it "is invalid without a pasword" do
+      expect(User.new(username: 'alexander', password: '', password_confirmation: 'password', email: 'email@yahoo.com')).to have(1).errors_on(:password)
+    end
+
+    it "is invalid without a correct password confirmation" do
+     expect(User.new(username: 'alexander', password: 'password', password_confirmation: 'wrong', email: 'email@yahoo.com')).to have(1).errors_on(:password_confirmation)
     end
   end
 
-  context "associations" do
+  describe "User associations" do
     it { should have_many :questions }
     it { should have_many :answers }
     it { should have_many :comments }
     it { should have_many :votes }
   end
-
-  context "validations" do
-    it { should validate_presence_of :email }
-    it { should validate_uniqueness_of :email }
-    # it { should validate_length_of :email, :minimum => 3 }
-    it { should_not allow_value("blah").for(:email) }
-    it { should_not allow_value("b lah").for(:email) }
-    it { should allow_value("a@b.com").for(:email) }
-    it { should_not allow_value("a.com").for(:email) }
-    it { should allow_value("asdf@asdf.com").for(:email) }
-    it { should validate_presence_of :username }
-    it { should validate_uniqueness_of :username }
-    it { should ensure_length_of(:username).is_at_least(3).
-              with_message(/must be at least 3 characters, fool!/) }
-    # it { should validate_uniqueness_of :username }
-  end
-
 
 end
