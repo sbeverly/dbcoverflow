@@ -1,5 +1,6 @@
 class QuestionsController < ApplicationController	
 	before_action :find_question, only: [:show, :edit, :update, :destroy, :upvote, :downvote]
+	before_action :logged_in?, only: [:upvote, :downvote]
 
 	def index
 		if session[:user_id]
@@ -39,7 +40,7 @@ class QuestionsController < ApplicationController
 
 	def upvote
 		flash[:notice] = "your upvote has been recorded"
-		Vote.create()
+		@question << Vote.create()
 		redirect_to question_path(@question)
 	end
 
