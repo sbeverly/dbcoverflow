@@ -12,8 +12,8 @@ class User < ActiveRecord::Base
 
   has_secure_password
 
-  def self.authenticate(email, password)
-    user = User.find_by_email(email)
+  def self.authenticate(username, password)
+    user = User.find_by_username(username)
     return user if user && (user.password == password)
     nil # either invalid email or wrong password
   end

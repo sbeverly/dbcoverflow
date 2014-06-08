@@ -5,12 +5,11 @@ class SessionsController < ApplicationController
 	end
 
 	def create
+		puts params
 		if user = User.authenticate(params[:username], params[:password])
-			puts "hello THEREEE"
 			session[:user_id] = user.id
 			redirect_to questions_url, notice: "Logged In!"
 		else
-			puts "NOOOOOOOOOOOOOOO"
 			flash.now.alert = "Invalid Email or Password"
 			render 'new'
 		end
