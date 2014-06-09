@@ -13,15 +13,15 @@
 <body>
 
 
-	<div id="top-bar">
+	<div class="navbar navbar-default" role="navigation">
 		<nav>
 				<ul>
 					<li id="name"><%= link_to "DBC-OVERFLOW", root_path %></li>
 					<% if session[:user_id] %>
-					<%= link_to "My Profile", user_path(@session) %>
+					<%= link_to "My Profile", user_path(@session), class: 'navbar-btn' %>
 					<%= link_to "Logout", logout_path, method: :delete %>
 					<% else %>
-						<%= link_to "Login", login_path %>
+						<%= link_to "Login", login_path, class: 'navbar-btn' %>
 						<%= link_to "Signup", new_user_path %>
 					<% end %>
 				</ul>
