@@ -3,8 +3,8 @@
 <h1><%= @question.body %></h1>
 
 <% if @question.user_id == session[:user_id] %>
-	<%= link_to("edit", edit_question_path) %>
-	<%= link_to "delete", @question, method: :delete, data: { confirm: "Delete this question?" } %>
+  <%= link_to("edit", edit_question_path) %>
+  <%= link_to "delete", @question, method: :delete, data: { confirm: "Delete this question?" } %>
 <% end %>
 
 <br>
@@ -19,16 +19,16 @@
 <div id="add_comment_box_to_questions"></div>
 
 <% unless @question.comments.empty? %>
-	<h3> Comments on Question </h3>
-	<ul>
-		<% @question.comments.each do |comment| %>
-			<li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
-		<% end %>
-	</ul>
+  <h3> Comments on Question </h3>
+  <ul>
+    <% @question.comments.each do |comment| %>
+      <li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
+    <% end %>
+  </ul>
 <% end %>
 
 <% if session[:user_id] %>
-	<%= link_to "add comment", new_question_comment_path(@question), :remote => true %>
+  <%= link_to "add comment", new_question_comment_path(@question), :remote => true %>
 <% end %>
 
 
@@ -68,16 +68,17 @@
 
 	<% else %>
 	<h3> No one has provided an answer yet </h3>
+
 <% end %>
 
 
 
 <% if session[:user_id] != nil %>
-	<%= form_for [@question, @answer] do |f| %>
-		<%= f.label :answer %>
-		<%= f.text_field :body %>
-		<%= f.submit "submit answer"%>
-	<% end %>
+  <%= form_for [@question, @answer] do |f| %>
+    <%= f.label :answer %>
+    <%= f.text_field :body %>
+    <%= f.submit "submit answer"%>
+  <% end %>
 <% else %>
-	<p> Login to post an answer! </p>
+  <p> Login to post an answer! </p>
 <% end %>
