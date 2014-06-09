@@ -17,15 +17,16 @@ class AnswersController < ApplicationController
   end
 
   def upvote
-    # @answer.vote.score += 1
-    # @answer.vote.save
-    # redirect_to question_path(@question)
+    @answer = Answer.find(params[:id])
+    @answer.vote.score += 1
+    @answer.vote.save
+    redirect_to question_path(@question)
   end
 
   def downvote
-    # @answer.vote.score -= 1
-    # @answer.vote.save
-    # redirect_to question_path(@question)
+    @answer.vote.score -= 1
+    @answer.vote.save
+    redirect_to question_path(@question)
   end
 
   private
