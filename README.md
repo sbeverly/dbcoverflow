@@ -4,6 +4,8 @@ A functional clone of Stack Overflow.
 ## QUICK START
 Run `$ bundle install`
 
+Run `$ bundle exec rake assets:precompile RAILS_ENV=production` to compile vendor asset pipeline
+
 Run `$ rake db:setup` or `$ rake db:create:all`
 
 To run Capybara tests in Chrome instead of its default browser (Firefox), see testing section at bottom.
