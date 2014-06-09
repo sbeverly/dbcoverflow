@@ -36,7 +36,12 @@
 		<% @answers.each do |answer| %>
 				<li> 
 					<% answer_id = answer.id %>
-					<%= answer.body %> 
+					<%= answer.body %><br> 
+
+					<%= link_to "Up", question_answer_upvote_path, method: :post, class: "up_button" %>
+					<%= @question.vote.score %>
+					<%= link_to "Down", question_answer_downvote_path, method: :post, class: "down_button" %>
+
 					<div id="add_comment_box_to_answers_<%=answer_id%>"></div>
 
 					<% if session[:user_id] == answer.user.id %>
