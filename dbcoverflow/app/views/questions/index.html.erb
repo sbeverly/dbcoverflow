@@ -1,18 +1,25 @@
-<h1> Questions </h1>
+<div class='container'>
+	<div class= 'row'>
+		<div class= 'col-sm-5 form-group'>
+			<!-- <h2>Ask a Question:</h2> -->
 
-<div class='new-question'>
-	<h2>Ask a Question:</h2>
+			<div class='input-group' id='fixed-div'>
+				<%= form_for @question do |f| %>
+					<%= f.text_area	:body, class: 'form-control input-normal' %>
+					<%= f.submit "Ask a Question", class: 'btn' %>
+				<% end %>
+			</div>
+		</div>
 
-	<%= form_for @question do |f| %>
-		<%= f.text_area	:body %>
-		<%= f.submit "Post Question" %>
-	<% end %>
+		<div class= 'col-md-7'>
+			<h2 class=''> Questions from the Community: </h2>
+			<ul class='list-unstyled'>
+				<% @questions.each do |question| %>
+					<li> 
+						<a href="/questions/<%= question.id %>", class='edit-link'><%= question.body %></a> <p><%= question.answers.count %> answers so far... </p> <br>
+					</li>
+				<% end %>
+			</ul>
+		</div>
+	</div>
 </div>
-
-<ul>
-	<% @questions.each do |question| %>
-		<li> 
-			<a href="/questions/<%= question.id %>", class='edit-link'><%= question.body %></a> - Answers(<%= question.answers.count %>)<br>
-		</li>
-	<% end %>
-</ul>
