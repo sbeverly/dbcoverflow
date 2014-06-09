@@ -15,7 +15,7 @@ nav ul {
 nav {
     float: right;
 }
-nav li {
+nav ul li {
     display: inline;
 }
 #name {
@@ -28,12 +28,14 @@ nav li {
     font-size: 32px;
     padding: 0;
 }
-nav li a {
+#name a:hover {
+    text-decoration: none;
+}
+nav ul li a {
     color: #fff;
     text-decoration: none;
-    padding: 10px 0;
+    padding: 20px 0;
 }
-
-nav li a:hover {
-    text-decoration: none;
+nav ul li a:hover {
+    color: white;
 }

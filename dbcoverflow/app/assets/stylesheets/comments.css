@@ -2,3 +2,8 @@
 	font-size: 12px;
 	margin-left: 10px;
 }
+.comment-user {
+  background-color: #deedff;
+  color: #4a6b82;
+  padding: 5px;
+}
