@@ -1,14 +1,14 @@
 <h1>Login</h1>
 
+<div class="well">
 <%= form_tag login_path do %>
-	<p>
-		<%= label_tag :username %>
-		<%= text_field_tag :username, params[:username] %>
-	</p>
-	<p>
-		<%= label_tag :password %>
-		<%= password_field_tag :password, params[:password] %>
-	</p>
-	<p><%= submit_tag(value = "Login") %></p>
+
+    <%= label_tag :username %> <br>
+    <%= text_field_tag :username, params[:username] %>
+<br><br>
+    <%= label_tag :password %> <br>
+    <%= password_field_tag :password, params[:password] %>
+<br><br>
+  <%= submit_tag(value = "Login") %>
 <% end %>
-  
+</div>
