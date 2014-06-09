@@ -3,8 +3,8 @@
 <h1><%= @question.body %></h1>
 
 <% if @question.user_id == session[:user_id] %>
-	<%= link_to("edit", edit_question_path) %>
-	<%= link_to "delete", @question, method: :delete, data: { confirm: "Delete this question?" } %>
+  <%= link_to("edit", edit_question_path) %>
+  <%= link_to "delete", @question, method: :delete, data: { confirm: "Delete this question?" } %>
 <% end %>
 
 <br>
@@ -17,63 +17,63 @@
 <div id="add_comment_box_to_questions"></div>
 
 <% unless @question.comments.empty? %>
-	<h3> Comments on Question </h3>
-	<ul>
-		<% @question.comments.each do |comment| %>
-			<li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
-		<% end %>
-	</ul>
+  <h3> Comments on Question </h3>
+  <ul>
+    <% @question.comments.each do |comment| %>
+      <li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
+    <% end %>
+  </ul>
 <% end %>
 
 <% if session[:user_id] %>
-	<%= link_to "add comment", new_question_comment_path(@question), :remote => true %>
+  <%= link_to "add comment", new_question_comment_path(@question), :remote => true %>
 <% end %>
 
 
 <% if @answers.empty? == false %>
-	<h3>Answers</h3>
-	<ol>
-		<% @answers.each do |answer| %>
-				<li> 
-					<% answer_id = answer.id %>
-					<%= answer.body %><br> 
+  <h3>Answers</h3>
+  <ol>
+<% @answers.each do |answer| %>
+          <li>
+            <% answer_id = answer.id %>
+          <%= answer.body %><br>
 
-					<%= link_to "Up", answer_upvote_path, method: :post, class: "up_button" %>
-					<%= @question.vote.score %>
-					<%= link_to "Down", answer_downvote_path, method: :post, class: "down_button" %>
+          <%= link_to "Up", question_answer_upvote_path, method: :post, class: "up_button" %>
+          <%= @question.vote.score %>
+          <%= link_to "Down", question_answer_downvote_path, method: :post, class: "down_button" %>
 
-					<div id="add_comment_box_to_answers_<%=answer_id%>"></div>
+            <div id="add_comment_box_to_answers_<%=answer_id%>"></div>
 
-					<% if session[:user_id] == answer.user.id %>
-						<%= link_to("delete", [@question, answer], method: :delete, confirm: 'Sure you want to deprive us of your wisdom?') %> <br>
-					<% end %>
-					<ul>
-						<% if answer.comments.empty? == false %>
-							<% answer.comments.each do |comment| %>
-								<li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
-							<% end %>
-						<% end %> 
-					</ul>
-				</li>
+            <% if session[:user_id] == answer.user.id %>
+            <%= link_to("delete", [@question, answer], method: :delete, confirm: 'Sure you want to deprive us of your wisdom?') %> <br>
+          <% end %>
+          <ul>
+            <% if answer.comments.empty? == false %>
+              <% answer.comments.each do |comment| %>
+                <li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
+              <% end %>
+            <% end %>
+          </ul>
+        </li>
 
-			<% if session[:user_id] %>
-				<%= link_to "add comment", new_answer_comment_path(answer_id), :remote => true %> <br>
-			<% end %>
-		<% end %>
-	</ol>
+      <% if session[:user_id] %>
+        <%= link_to "add comment", new_answer_comment_path(answer_id), :remote => true %> <br>
+      <% end %>
+    <% end %>
+  </ol>
 
-	<% else %>
-	<h3> No one has provided an answer yet </h3>
+  <% else %>
+  <h3> No one has provided an answer yet </h3>
 <% end %>
 
 
 
 <% if session[:user_id] != nil %>
-	<%= form_for [@question, @answer] do |f| %>
-		<%= f.label :answer %>
-		<%= f.text_field :body %>
-		<%= f.submit "submit answer"%>
-	<% end %>
+  <%= form_for [@question, @answer] do |f| %>
+    <%= f.label :answer %>
+    <%= f.text_field :body %>
+    <%= f.submit "submit answer"%>
+  <% end %>
 <% else %>
-	<p> Login to post an answer! </p>
+  <p> Login to post an answer! </p>
 <% end %>
