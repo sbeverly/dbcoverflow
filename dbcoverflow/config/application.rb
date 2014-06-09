@@ -11,30 +11,6 @@ require "sprockets/railtie"
 # you've limited to :test, :development, or :production.
 Bundler.require(:default, Rails.env)
 
-## Compile vendor asset pipeline
-config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif,
-"fontawesome-webfont.ttf",
-"fontawesome-webfont.eot",
-"fontawesome-webfont.svg",
-"fontawesome-webfont.woff")
-
-config.assets.precompile << Proc.new do |path|
-  if path =~ /\.(css|js)\z/
-    full_path = Rails.application.assets.resolve(path).to_path
-    app_assets_path = Rails.root.join('app', 'assets').to_path
-    if full_path.starts_with? app_assets_path
-      puts "including asset: " + full_path
-      true
-    else
-      puts "excluding asset: " + full_path
-      false
-    end
-  else
-    false
-  end
-end
-##
-
 module Dbcoverflow
   class Application < Rails::Application
     config.i18n.enforce_available_locales = true
@@ -49,5 +25,29 @@ module Dbcoverflow
     # The default locale is :en and all translations from config/locales/*.rb,yml are auto loaded.
     # config.i18n.load_path += Dir[Rails.root.join('my', 'locales', '*.{rb,yml}').to_s]
     # config.i18n.default_locale = :de
+
+    ## Compile vendor asset pipeline
+    config.assets.precompile += %w(*.png *.jpg *.jpeg *.gif,
+    "fontawesome-webfont.ttf",
+    "fontawesome-webfont.eot",
+    "fontawesome-webfont.svg",
+    "fontawesome-webfont.woff")
+
+    config.assets.precompile << Proc.new do |path|
+      if path =~ /\.(css|js)\z/
+        full_path = Rails.application.assets.resolve(path).to_path
+        app_assets_path = Rails.root.join('app', 'assets').to_path
+        if full_path.starts_with? app_assets_path
+          puts "including asset: " + full_path
+          true
+        else
+          puts "excluding asset: " + full_path
+          false
+        end
+      else
+        false
+      end
+    end
+    ##
   end
 end
