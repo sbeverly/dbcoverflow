@@ -38,9 +38,9 @@
 					<% answer_id = answer.id %>
 					<%= answer.body %><br> 
 
-					<%= link_to "Up", answer_upvote_path(question_id: @question.id), method: :post, class: "up_button" %>
-					<%= @question.vote.score %>
-					<%= link_to "Down", answer_downvote_path(question_id: @question.id), method: :post, class: "down_button" %>
+					<%= link_to "Up", answer_upvote_path(answer_id: answer.id), method: :post, class: "up_button" %>
+					<%= answer.vote.score %>
+					<%= link_to "Down", answer_downvote_path(answer_id: answer.id), method: :post, class: "down_button" %>
 
 					<div id="add_comment_box_to_answers_<%=answer_id%>"></div>
 
