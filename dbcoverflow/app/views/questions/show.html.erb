@@ -7,13 +7,15 @@
 	<%= link_to "delete", @question, method: :delete, data: { confirm: "Delete this question?" } %>
 <% end %>
 
+<br>
 <%= link_to "Up", question_upvote_path, method: :post, class: "up_button" %>
 <%= @question.vote.score %>
 <%= link_to "Down", question_downvote_path, method: :post, class: "down_button" %>
 <br>
 <br>
 
-	<div id="add_comment_box_to_questions"></div>
+<div id="add_comment_box_to_questions"></div>
+
 <% unless @question.comments.empty? %>
 	<h3> Comments on Question </h3>
 	<ul>
@@ -23,7 +25,9 @@
 	</ul>
 <% end %>
 
-<%= link_to "add comment", new_question_comment_path(@question), :remote => true %>
+<% if session[:user_id] %>
+	<%= link_to "add comment", new_question_comment_path(@question), :remote => true %>
+<% end %>
 
 
 <% if @answers.empty? == false %>
@@ -46,7 +50,10 @@
 						<% end %> 
 					</ul>
 				</li>
-	<%= link_to "add comment", new_answer_comment_path(answer_id), :remote => true %> <br>
+
+			<% if session[:user_id] %>
+				<%= link_to "add comment", new_answer_comment_path(answer_id), :remote => true %> <br>
+			<% end %>
 		<% end %>
 	</ol>
 
