@@ -1,7 +1,7 @@
 Dbcoverflow::Application.routes.draw do
   root to: 'questions#index'
 
-  resources :user
+  resources :users
   resources :comments
   resources :votes
   resources :questions do
