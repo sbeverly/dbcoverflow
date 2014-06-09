@@ -20,7 +20,7 @@ nav {
 nav li {
 	padding-top: 10px;
 	padding-bottom: 10px;
-	float: left;
+	display: inline;
 }
 nav li:first-child  {
 	position: absolute;
