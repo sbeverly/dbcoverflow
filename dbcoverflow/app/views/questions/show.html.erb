@@ -7,24 +7,27 @@
 <% end %>
 <h1 class="h1 single-question"><%= @question.body %></h1>
 
+
+<div id="add_comment_box_to_questions"></div>
+<% if session[:user_id] %>
+  <br><%= link_to "add comment", new_question_comment_path(@question), :remote => true %>
+<% end %>
+
+
 <% if @question.user_id == session[:user_id] %>
-<br>
 <br>
   <%= link_to("edit", edit_question_path) %>
   <%= link_to "delete", @question, method: :delete, data: { confirm: "Delete this question?" } %>
+<br>
 <% end %>
-<div id="add_comment_box_to_questions"></div>
 
 <% unless @question.comments.empty? %>
-  <p><strong>Comments</strong></p>
+  <br><p><strong>Comments</strong></p>
   <ul class="list-group">
     <% @question.comments.each do |comment| %>
       <li class="list-group-item"><%= comment.body %> - <span class="comment-user"><%= User.find(comment.user_id).username %></span></li>
     <% end %>
 
-<% if session[:user_id] %>
-  <%= link_to "add comment", new_question_comment_path(@question), :remote => true %>
-<% end %>
 
   </ul>
 <% end %>
