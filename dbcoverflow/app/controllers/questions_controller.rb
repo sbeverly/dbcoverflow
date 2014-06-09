@@ -17,7 +17,9 @@ class QuestionsController < ApplicationController
 	end
 
 	def create
+		@user = User.find(session[:user_id])
 		@question = Question.create(body: params[:question][:body])
+		@user.questions << @question
 		@question.vote = Vote.create
 		redirect_to root_path
 	end

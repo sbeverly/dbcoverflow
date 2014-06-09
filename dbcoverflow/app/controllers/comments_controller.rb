@@ -16,18 +16,26 @@ class CommentsController < ApplicationController
 
 
   def create
+    p "heres the comment params"
+    p comment_params
     p "****"
+    @user = User.find(session[:user_id])
     @commentable = find_commentable
     # p "***"
-    # p params
-    p @commentable
+    p "heres the params"
+    p params
     p "*********"
-    @commentable.comments.create(comment_params)
+    @comment = Comment.create(user_id: session[:user_id], body: comment_params[:body])
+    @commentable.comments << @comment
+  
+    # @commentable.comments.create(comment_params)
     # comment = Comment.create(comment_params)
 
     # p comment_params
     p "you got here!!!!"
-    # p comment
+    p @commentable.comments
+    p @user.comments
+
     p "*"
     redirect_to :back
 
@@ -37,7 +45,7 @@ class CommentsController < ApplicationController
   private
 
   def comment_params
-    params.require(:comment).permit(:body)
+    params.require(:comment).permit(:body, :user_id)
   end
 
 
