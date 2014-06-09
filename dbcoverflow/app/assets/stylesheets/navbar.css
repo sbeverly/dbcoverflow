@@ -1,8 +1,13 @@
+body {
+	padding-top: 30px;
+}
+
 #top-bar {
 	font-family: open sans;
 	color: #fff;
-	background-color: #000000;
+	background-color: #000;
 	position: fixed;
+	top: 0;
 	width: 100%;
 }
 
@@ -18,8 +23,6 @@ nav {
 }
 
 nav li {
-	padding-top: 10px;
-	padding-bottom: 10px;
 	display: inline;
 }
 nav li:first-child  {
@@ -30,13 +33,11 @@ nav li:first-child  {
 
 nav li a {
 	color: #fff;
-	padding: 10px 10px;
 	text-decoration: none;
 }
 
 nav li:first-child a {
 	color: #3366FF;
-	padding: 10px 10px;
 	text-decoration: none;
 }
 
