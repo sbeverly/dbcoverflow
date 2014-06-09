@@ -33,7 +33,9 @@
 					<%= answer.body %> 
 					<div id="add_comment_box_to_answers_<%=answer_id%>"></div>
 
-					<%= link_to("delete", [@question, answer], method: :delete, confirm: 'Sure you want to deprive us of your wisdom?') %> <br>
+					<% if session[:user_id] == answer.user.id %>
+						<%= link_to("delete", [@question, answer], method: :delete, confirm: 'Sure you want to deprive us of your wisdom?') %> <br>
+					<% end %>
 					<ul>
 						<% if answer.comments.empty? == false %>
 							<% answer.comments.each do |comment| %>
