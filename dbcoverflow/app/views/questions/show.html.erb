@@ -19,10 +19,10 @@
 <div id="add_comment_box_to_questions"></div>
 
 <% unless @question.comments.empty? %>
-  <h3> Comments on Question </h3>
-  <ul>
+  <p><strong>Comments</strong></p>
+  <ul class="list-group">
     <% @question.comments.each do |comment| %>
-      <li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
+      <li class="list-group-item"><%= comment.body + "- #{User.find(comment.user_id).username}" %></li>
     <% end %>
   </ul>
 <% end %>
@@ -34,11 +34,11 @@
 
 <% if @answers.empty? == false %>
 	<h3>Answers</h3>
-	<ol>
+	<ul class="list-group">
 		<% @answers.each do |answer| %>
-				<li> 
+				<li class="list-group-item">
 					<% answer_id = answer.id %>
-					<%= answer.body %><br> 
+					<%= answer.body %><br>
 
 					<% if session[:user_id] %>
 						<%= link_to "Up", answer_upvote_path(question_id: @question.id, answer_id: answer.id), method: :post, class: "up_button" %>
@@ -51,12 +51,12 @@
 					<% if session[:user_id] == answer.user.id %>
 						<%= link_to("delete", [@question, answer], method: :delete, confirm: 'Sure you want to deprive us of your wisdom?') %> <br>
 					<% end %>
-					<ul>
+					<ul class="list-group">
 						<% if answer.comments.empty? == false %>
 							<% answer.comments.each do |comment| %>
-								<li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
+								<li class="list-group-item"> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
 							<% end %>
-						<% end %> 
+						<% end %>
 					</ul>
 				</li>
 
@@ -64,7 +64,7 @@
 				<%= link_to "add comment", new_answer_comment_path(answer_id), :remote => true %> <br>
 			<% end %>
 		<% end %>
-	</ol>
+	</ul>
 
 	<% else %>
 	<h3> No one has provided an answer yet </h3>

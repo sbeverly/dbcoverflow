@@ -1,9 +1,9 @@
 class CommentsController < ApplicationController
-  
+
 
   def new
     @commentable = find_commentable
-   
+
     respond_to do |format|
       if @commentable.class == Question
         format.js { render :show_comment_question, :locals => {:commentable => @commentable}}
@@ -16,27 +16,11 @@ class CommentsController < ApplicationController
 
 
   def create
-    p "heres the comment params"
-    p comment_params
-    p "****"
     @user = User.find(session[:user_id])
     @commentable = find_commentable
-    # p "***"
-    p "heres the params"
-    p params
-    p "*********"
-    @comment = Comment.create(user_id: session[:user_id], body: comment_params[:body])
+    @comment = Comment.create(user: @user, body: params[:comment][:body] )
+    # @comment = Comment.create(comment_params)
     @commentable.comments << @comment
-  
-    # @commentable.comments.create(comment_params)
-    # comment = Comment.create(comment_params)
-
-    # p comment_params
-    p "you got here!!!!"
-    p @commentable.comments
-    p @user.comments
-
-    p "*"
     redirect_to :back
 
   end

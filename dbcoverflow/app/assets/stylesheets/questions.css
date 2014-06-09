@@ -1,0 +1,17 @@
+a.question {
+  color: #07c;
+  font-size: 3em;
+  display: inline;
+  margin-left: 30px;
+}
+
+.answer-block {
+  display: inline;
+  position: relative;
+}
+
+.badge {
+  position: relative;
+  left: 15px;
+  top: 15px;
+}

@@ -1,22 +1,27 @@
-<h1> Questions </h1>
+<h1 class="h1"> Questions </h1>
 
 <div class='new-question'>
-	<h2>Ask a Question:</h2>
+  <h2>Ask a Question</h2>
 
-	<% if session[:user_id]%>
-		<%= form_for @question do |f| %>
-			<%= f.text_area	:body %>
-			<%= f.submit "Post Question" %>
-		<% end %>
-	<% else %>
-		<p> you must be logged in to ask a question.</p>
-	<% end %>
+  <% if session[:user_id]%>
+    <%= form_for @question, html: { class: "form-group" } do |f| %>
+      <%= f.text_area :body %><br><br>
+      <%= f.submit "Post Question", html: { class: "input-control" } %>
+    <% end %>
+  <% else %>
+    <p> you must be logged in to ask a question.</p>
+  <% end %>
 </div>
 
-<ul>
-	<% @questions.each do |question| %>
-		<li> 
-			<a href="/questions/<%= question.id %>", class='edit-link'><%= question.body %></a> - Answers(<%= question.answers.count %>)<br>
-		</li>
-	<% end %>
+<ul class="list-group">
+  <% @questions.each do |question| %>
+    <li class="list-group-item">
+      <div class="answer-block">
+        <span class="badge center"><%= question.answers.count %></span>
+        <br>
+        Answers
+      </div>
+      <%= link_to question.body, question_path(question.id), class: "question" %><br>
+    </li>
+  <% end %>
 </ul>

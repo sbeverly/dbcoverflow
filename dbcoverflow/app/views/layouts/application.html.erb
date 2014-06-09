@@ -2,8 +2,6 @@
 <html>
 <head>
   <title>DBC Overflow</title>
-
-
   <%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag 'application', "http://fonts.googleapis.com/css?family=Open+Sans:300,700,800" %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
@@ -11,10 +9,10 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-  <div id="top-bar">
+  <div id="top-nav">
     <nav>
         <ul>
-          <li id="name"><%= link_to "DBC-OVERFLOW", root_path %></li>
+          <li id="name"><%= link_to "DBC OVERFLOW", root_path %></li>
           <% if session[:user_id] %>
           <li><%= link_to "My Profile", user_path(session[:user_id]) %></li>
           <li><%= link_to "Logout", logout_path, method: :delete %></li>
@@ -26,8 +24,7 @@
     </nav>
   </div>
 
-
-
+<div class="container">
 
 <% flash.each do |key, value| %>
   <div class='flash' id='<%= key %>'>
@@ -37,5 +34,6 @@
 
 
 <%= yield %>
+</div>
 </body>
 </html>
