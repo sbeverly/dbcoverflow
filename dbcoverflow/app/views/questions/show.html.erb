@@ -5,7 +5,7 @@
   <%= link_to "v", question_downvote_path, method: :post, class: "down_button" %>
 </div>
 <% end %>
-<h1 class="h1 question"><%= @question.body %></h1>
+<h1 class="h1 single-question"><%= @question.body %></h1>
 
 <% if @question.user_id == session[:user_id] %>
 <br>
@@ -36,7 +36,7 @@
     <% @answers.each do |answer| %>
         <li class="list-group-item">
           <% answer_id = answer.id %>
-          <%= answer.body %><br>
+          <%= answer.body %> -<span class="comment-user"><%= User.find(answer.user_id).username %>
 
           <% if session[:user_id] %>
             <div class="vote-block">
@@ -54,7 +54,7 @@
           <% end %><br>
             <% if answer.comments.empty? == false %>
               <% answer.comments.each do |comment| %>
-                <li class="list-group-item"> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
+                <li class="list-group-item"><%= comment.body %> -<span class="comment-user"><%= User.find(comment.user_id).username %></span></li>
               <% end %>
             <% end %>
           </ul>
