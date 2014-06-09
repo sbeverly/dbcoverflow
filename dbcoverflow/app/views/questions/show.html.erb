@@ -11,9 +11,9 @@
 <br>
 <br>
 
+	<div id="add_comment_box_to_questions"></div>
 <% unless @question.comments.empty? %>
 	<h3> Comments on Question </h3>
-	<div id="add_comment_box_to_questions"></div>
 	<ul>
 		<% @question.comments.each do |comment| %>
 			<li> <%= "#{User.find(comment.user_id).username} said... " + comment.body %> </li>
